@@ -1,5 +1,5 @@
 # Use root/example as user/password credentials
-version: '3.1'
+version: '2'
 
 services:
   app:
@@ -59,6 +59,18 @@ services:
     networks:
       app-network:
           ipv4_address: 12.1.0.4
+  rabbit:
+    image: 'bitnami/rabbitmq:latest'
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      RABBITMQ_USERNAME: admin
+      RABBITMQ_PASSWORD: 12345
+    networks:
+      app-network:
+          ipv4_address: 12.1.0.5
 
 #Docker Networks
 networks:
