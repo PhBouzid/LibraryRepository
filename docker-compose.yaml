@@ -1,0 +1,76 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: library_online
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+        app-network:
+            ipv4_address: 12.1.0.1
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      app-network:
+          ipv4_address: 12.1.0.2
+
+  db:
+    image: mysql
+    container_name: db
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 12345
+      MYSQL_DATABASE: Library
+    networks:
+      app-network:
+          ipv4_address: 12.1.0.3
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      app-network:
+          ipv4_address: 12.1.0.4
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+        config:
+          - subnet: 12.1.0.0/24
+            ip_range: 12.1.0.0/32
+            gateway: 12.1.0.254
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
