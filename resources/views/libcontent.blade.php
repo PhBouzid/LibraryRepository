@@ -4,8 +4,17 @@
 
 @section('content')
 <h2 style="margin: 1.1em">
-    Библиотека - Книги
+    @if($category===0)
+        Все медиа ресурсы
+    @elseif($category===1)
+        Все книги
+    @elseif($category===2)
+        Все видео записи
+    @elseif($category===3)
+        Все статьи и журналы
+    @endif
 </h2>
+{{ $medias->links() }}
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item"><a class="page-link" href="#">Назад</a></li>
@@ -26,27 +35,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Иванов ИИ</td>
-        <td>Книга синяя</td>
-        <td>2010</td>
-        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, impedit.</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Петров ПП</td>
-        <td>Азбука</td>
-        <td>1998</td>
-        <td>Lorem ipsum dolor sit amet.</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Сидоров ВВ</td>
-        <td>Книга короткая</td>
-        <td>1980</td>
-        <td>Lorem ipsum dolor sit amet, consectetur adipisicing.</td>
-    </tr>
+        @foreach ($medias as $media)
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ $media->author }}</td>
+                <td>{{ $media->name}}</td>
+                <td>2010</td>
+                <td>{{ $media->abstract}}</td>
+            </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection

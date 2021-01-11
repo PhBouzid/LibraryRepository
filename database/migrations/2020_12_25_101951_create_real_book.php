@@ -14,8 +14,11 @@ class CreateRealBook extends Migration
     public function up()
     {
         Schema::create('real_book', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->timestamps();
+            $table->string('book_name');
+            $table->string('book_author');
+            $table->string('book_abstract');
         });
     }
 

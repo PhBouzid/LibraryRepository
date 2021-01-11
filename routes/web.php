@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MediaTask;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,34 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('libcontent');
-});
+Route::get('/', [MediaTask::class,'getMedia']);
 
-Route::post('login', 'LoginController@login');
+Route::get('/books', [MediaTask::class,'showBooks']);
 
-Route::get('cabinet/{userId}', function ($userId) {
+Route::get('/videos', [MediaTask::class,'showVideos']);
 
-});
+Route::get('/articles', [MediaTask::class,'showArticles']);
 
-Route::prefix('cabinet')->middleware('auth')->group(function(){
-    Route::get('deferred/{id}/all', function ($id) {});
-    Route::post('deferred/{id}/add',function($id){});
-    Route::post('deferred/{id}/cancel',function($id){});
-    Route::get('requested/{id}/all', function($id){});
-    Route::post('requested/{id}/add',function($id){});
-    Route::post('requested/{id}/cancel',function($id){});
-    Route::get('downloaded/{id}/all', function($id){});
-    Route::get('profile/{id}',function($id){});
-    Route::post('profile/{id}/change',function($id){});
-});
+Route::get('/books/book/{id}',[MediaTask::class,'showBook']);
 
-Route::prefix('librarian')->middleware('auth')->group(function(){
-    Route::post('upload',function(){});
-    Route::get('uploaded',function(){});
-    Route::get('monitoring/all',function(){});
-    Route::get('requests/all',function(){});
-    Route::get('request/{id}',function(){});
-});
+Route::get('/videos/video/{id}',[MediaTask::class,'showVideo']);
+
+Route::get('/articles/article/{id}',[MediaTask::class,'showVideo']);
 
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+
+
+require __DIR__.'/auth.php';

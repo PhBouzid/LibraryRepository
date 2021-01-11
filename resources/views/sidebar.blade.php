@@ -6,7 +6,7 @@
         <a href="library_media.html" class="list-group-item list-group-item-action bg-light border-bottom-0">
             <span class="ml-3">Медиа</span>
         </a>
-        <a href="library_books.html" class="list-group-item list-group-item-action bg-light border-bottom-0">
+        <a href="/books" class="list-group-item list-group-item-action bg-light border-bottom-0">
             <span class="ml-3">Книги</span>
         </a>
         <a href="library_magazines.html" class="list-group-item list-group-item-action bg-light border-bottom-0">

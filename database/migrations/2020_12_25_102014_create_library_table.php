@@ -14,7 +14,10 @@ class CreateLibraryTable extends Migration
     public function up()
     {
         Schema::create('library', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->integer('student_id');
+            $table->integer('approved_emp_id');
+            $table->integer('book_id');
             $table->timestamps();
         });
     }

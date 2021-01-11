@@ -45,7 +45,6 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '12.1.0.3'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'Library'),
