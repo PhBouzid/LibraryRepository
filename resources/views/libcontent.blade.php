@@ -35,13 +35,13 @@
     </tr>
     </thead>
     <tbody>
-        @foreach ($medias as $media)
+        @foreach ($medias as $key=>$media)
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">$key</th>
                 <td>{{ $media->author }}</td>
-                <td>{{ $media->name}}</td>
-                <td>2010</td>
-                <td>{{ $media->abstract}}</td>
+                <td>{{ $media->name }}</td>
+                <td>{{ $media->year }}</td>
+                <td>{{ $media->abstract }}</td>
             </tr>
         @endforeach
     </tbody>

@@ -27,6 +27,9 @@ Route::get('/videos/video/{id}',[MediaTask::class,'showVideo']);
 
 Route::get('/articles/article/{id}',[MediaTask::class,'showVideo']);
 
+Route::get('/myresource',[MediaTask::class,'myresource']);
+
+Route::get('')
 
 Route::get('/dashboard', function () {
     return view('dashboard');

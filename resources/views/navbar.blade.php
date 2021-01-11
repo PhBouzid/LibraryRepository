@@ -12,14 +12,14 @@
              </li>-->
             @if (!Auth::check())
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Вход</a>
+                    <a class="nav-link" href="/login">Вход</a>
                 </li>
             @elseif (Auth::check())
                 <li class="nav-item">
-                    <a class="nav-link" href="user.html">Личный кабинет</a>
+                    <a class="nav-link" href="/dashboard">Личный кабинет</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Выход</a>
+                    <a class="nav-link" href="/logout">Выход</a>
                 </li>
             @endif
 

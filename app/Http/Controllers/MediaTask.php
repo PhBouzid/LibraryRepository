@@ -10,8 +10,8 @@ class MediaTask extends Controller
 {
 
     public function getMedia(){
-        $media = Media::all()->paginate(15);
-        return view('libcontent',['medias'=>$media]);
+        $media = Media::paginate(15);
+        return view('libcontent',['medias'=>$media,'category'=>0]);
     }
 
     public function showBooks(){
