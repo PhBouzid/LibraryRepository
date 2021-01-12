@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MediaTask;
+use GuzzleHttp\Middleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +15,11 @@ use App\Http\Controllers\MediaTask;
 |
 */
 
-Route::get('/', [MediaTask::class,'getMedia']);
+Route::get('/', function(){
+    return view('welcome');
+});
+
+Route::get('/medias', [MediaTask::class,'getMedia']);
 
 Route::get('/books', [MediaTask::class,'showBooks']);
 
@@ -23,17 +29,48 @@ Route::get('/articles', [MediaTask::class,'showArticles']);
 
 Route::get('/books/book/{id}',[MediaTask::class,'showBook']);
 
+Route::put('/books/book/{id}',[MediaTask::class,'updateBook']);
+
 Route::get('/videos/video/{id}',[MediaTask::class,'showVideo']);
 
-Route::get('/articles/article/{id}',[MediaTask::class,'showVideo']);
+Route::put('/videos/video/{id}',[MediaTask::class,'updateVideo']);
 
-Route::get('/myresource',[MediaTask::class,'myresource']);
+Route::get('/articles/article/{id}',[MediaTask::class,'showArticle']);
 
-Route::get('')
+Route::put('/articles/article/{id}',[MediaTask::class,'updateArticle']);
+
+Route::get('/myresource',[UserMediaTask::class,'showResources']);
+
+Route::get('/myrecource/get/{id}',[UserMediaTask::class,'getResource']);
+
+Route::post('/myresource/add',[UserMediaTask::class,'addResource']);
+
+Route::put('/myresource/cancel',[UserMediaTask::class,'cancelResource']);
+
+Route::get('/library',[LibraryTask::class,'getAllLibrary']);
+
+Route::get('/library/get/{id}',[LibraryTask::class,'showLibraryBook']);
+
+Route::post('/library/request',[LibraryTask::class,'sendBookRequest']);
+
+Route::get('/library/requests',[LibraryTask::class,'showMyRequests']);
+
+Route::get('/library/requests/all',[LibraryTask::class,'showAllRequest']);
+
+Route::put('/library/request/{id}/approve',[LibraryTask::class,'approveRequest']);
+
+Route::put('/library/request/{id}/cancel',[LibraryTask::class,'cancelRequest']);
+
+
+Route::get('/admindashboard', function() {
+    return view('admin_dashboard');
+})->Middleware(['auth'])->name('admin_dashboard');
+
+Route::post('/admindashboard',[AdminTask::class,'upload']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->Middleware(['auth'])->name('dashboard');
 
 
 
