@@ -64,7 +64,7 @@ Route::put('/library/request/{id}/cancel',[LibraryTask::class,'cancelRequest']);
 
 Route::get('/admindashboard', function() {
     return view('admin_dashboard');
-})->Middleware(['auth'])->name('admin_dashboard');
+});
 
 Route::post('/admindashboard',[AdminTask::class,'upload']);
 
