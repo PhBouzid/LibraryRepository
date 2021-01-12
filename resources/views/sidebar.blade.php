@@ -13,8 +13,8 @@
             <span class="ml-3">Видео</span>
         </a>
 
-        <a href="adminpanel.html" class="list-group-item list-group-item-action bg-light">Администратор</a>
-        <a href="library_media.html" class="list-group-item list-group-item-action bg-light border-bottom-0">
+        <a href="/admindashboard" class="list-group-item list-group-item-action bg-light">Администратор</a>
+        <a href="/admindashboard" class="list-group-item list-group-item-action bg-light border-bottom-0">
             <span class="ml-3">Добавить</span>
         </a>
     </div>
