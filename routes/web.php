@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MediaTask;
+use App\Http\Controllers\UserMediaTask;
+use App\Http\Controllers\LibraryTask;
 use GuzzleHttp\Middleware;
 
 /*
@@ -19,59 +21,56 @@ Route::get('/', function(){
     return view('welcome');
 });
 
-Route::get('/medias', [MediaTask::class,'getMedia']);
+Route::get('/medias', [MediaTask::class,'getMedia'])->middleware('auth');
 
-Route::get('/books', [MediaTask::class,'showBooks']);
+Route::get('/books', [MediaTask::class,'showBooks'])->middleware('auth');
 
-Route::get('/videos', [MediaTask::class,'showVideos']);
+Route::get('/videos', [MediaTask::class,'showVideos'])->middleware('auth');
 
-Route::get('/articles', [MediaTask::class,'showArticles']);
+Route::get('/articles', [MediaTask::class,'showArticles'])->middleware('auth');
 
-Route::get('/books/book/{id}',[MediaTask::class,'showBook']);
+Route::get('/books/book/{id}',[MediaTask::class,'showBook'])->middleware('auth');
 
-Route::put('/books/book/{id}',[MediaTask::class,'updateBook']);
+Route::put('/books/book/{id}',[MediaTask::class,'updateBook'])->middleware('auth');
 
-Route::get('/videos/video/{id}',[MediaTask::class,'showVideo']);
+Route::get('/videos/video/{id}',[MediaTask::class,'showVideo'])->middleware('auth');
 
-Route::put('/videos/video/{id}',[MediaTask::class,'updateVideo']);
+Route::put('/videos/video/{id}',[MediaTask::class,'updateVideo'])->middleware('auth');
 
-Route::get('/articles/article/{id}',[MediaTask::class,'showArticle']);
+Route::get('/articles/article/{id}',[MediaTask::class,'showArticle'])->middleware('auth');
 
-Route::put('/articles/article/{id}',[MediaTask::class,'updateArticle']);
+Route::put('/articles/article/{id}',[MediaTask::class,'updateArticle'])->middleware('auth');
 
-Route::get('/myresource',[UserMediaTask::class,'showResources']);
+Route::get('/myresource',[UserMediaTask::class,'showResources'])->middleware('auth');
 
-Route::get('/myrecource/get/{id}',[UserMediaTask::class,'getResource']);
+Route::get('/myrecource/get/{id}',[UserMediaTask::class,'getResource'])->middleware('auth');
 
-Route::post('/myresource/add',[UserMediaTask::class,'addResource']);
+Route::post('/myresource/add/{id}',[UserMediaTask::class,'addResource'])->middleware('auth');
 
-Route::put('/myresource/cancel',[UserMediaTask::class,'cancelResource']);
+Route::put('/myresource/cancel/{id}',[UserMediaTask::class,'cancelResource'])->middleware('auth');
 
-Route::get('/library',[LibraryTask::class,'getAllLibrary']);
+Route::get('/library',[LibraryTask::class,'getAllLibrary'])->middleware('auth');
 
-Route::get('/library/get/{id}',[LibraryTask::class,'showLibraryBook']);
+Route::get('/library/get/{id}',[LibraryTask::class,'showLibraryBook'])->middleware('auth');
 
-Route::post('/library/request',[LibraryTask::class,'sendBookRequest']);
+Route::post('/library/request',[LibraryTask::class,'sendBookRequest'])->middleware('auth');
 
-Route::get('/library/requests',[LibraryTask::class,'showMyRequests']);
+Route::get('/library/requests',[LibraryTask::class,'showMyRequests'])->middleware('auth');
 
-Route::get('/library/requests/all',[LibraryTask::class,'showAllRequest']);
+Route::get('/library/requests/all',[LibraryTask::class,'showAllRequest'])->middleware('auth');
 
-Route::put('/library/request/{id}/approve',[LibraryTask::class,'approveRequest']);
+Route::put('/library/request/{id}/approve',[LibraryTask::class,'approveRequest'])->middleware('auth');
 
-Route::put('/library/request/{id}/cancel',[LibraryTask::class,'cancelRequest']);
-
+Route::put('/library/request/{id}/cancel',[LibraryTask::class,'cancelRequest'])->middleware('auth');
 
 Route::get('/admindashboard', function() {
     return view('admin_dashboard');
-});
+})->middleware('auth')->name('admindashboard');
 
-Route::post('/admindashboard',[AdminTask::class,'upload']);
+Route::post('/admindashboard',[MediaTask::class,'insertMedia'])->middleware('auth')->name('insertMedia');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->Middleware(['auth'])->name('dashboard');
-
-
+})->middleware('auth')->name('dashboard');
 
 require __DIR__.'/auth.php';

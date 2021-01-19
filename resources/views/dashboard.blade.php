@@ -11,50 +11,52 @@
     <div class="row my-3">
         <div class="col-md-3 mb-1">
             <div class="card text-center" style="height: 200px; cursor: pointer;">
+                <a href="/myresource" style="color: #000000;">
                 <div class="card-block">
                     <h4 class="card-title mt-4">Отложенные</h4>
                     <h2><i class="fa fa-bookmark fa-3x"></i></h2>
                 </div>
+                </a>
             </div>
         </div>
         <div class="col-md-3 mb-1">
             <div class="card text-center" style="height: 200px; cursor: pointer;">
-                <div class="card-block">
-                    <h4 class="card-title mt-4">Загруженные</h4>
-                    <h2><i class="fa fa-save fa-3x"></i></h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-1">
-            <div class="card text-center" style="height: 200px; cursor: pointer;">
+                <a href="/medias" style="color: #000000;">
                 <div class="card-block">
                     <h4 class="card-title mt-4">Библиотека</h4>
                     <h2><i class="fa fa-archive fa-3x"></i></h2>
                 </div>
+                </a>
             </div>
         </div>
         <div class="col-md-3 mb-1">
             <div class="card text-center" style="height: 200px; cursor: pointer;">
+                <a href="/book" style="color: #000000;">
                 <div class="card-block">
                     <h4 class="card-title mt-4">Книги</h4>
                     <h2><i class="fa fa-book fa-3x"></i></h2>
                 </div>
+                </a>
             </div>
         </div>
         <div class="col-md-3 mb-1">
             <div class="card text-center" style="height: 200px; cursor: pointer;">
+                <a href="/videos" style="color: #000000;">
                 <div class="card-block">
-                    <h4 class="card-title mt-4">Аудио</h4>
+                    <h4 class="card-title mt-4">Журналы/статьи</h4>
                     <h2><i class="fa fa-volume-up fa-3x"></i></h2>
                 </div>
+                </a>
             </div>
         </div>
         <div class="col-md-3 mb-1">
             <div class="card text-center" style="height: 200px; cursor: pointer;">
+                <a href="/videos" style="color: #000000;">
                 <div class="card-block">
                     <h4 class="card-title mt-4">Видео</h4>
                     <h2><i class="fa fa-video-camera fa-3x"></i></h2>
                 </div>
+                </a>
             </div>
         </div>
 

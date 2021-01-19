@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function medias(){
+        return $this->belongsToMany(Media::class);
+    }
+
+    public function requests(){
+        return $this->belongsToMany(Request::class);
+    }
 }

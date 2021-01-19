@@ -12,37 +12,37 @@
         Все видео записи
     @elseif($category===3)
         Все статьи и журналы
+    @elseif($category===4)
+        Мои медиа ресурсы
     @endif
 </h2>
-{{ $medias->links() }}
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Назад</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Вперед</a></li>
-    </ul>
-</nav>
-<table class="table">
+{{ $medias->links('pagination::bootstrap-4') }}
+<table class="table" style="width:100%">
     <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">Автор</th>
-        <th scope="col">Название</th>
-        <th scope="col">Год выпуска</th>
-        <th scope="col">Описание</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
         @foreach ($medias as $key=>$media)
-            <tr>
-                <th scope="row">$key</th>
-                <td>{{ $media->author }}</td>
-                <td>{{ $media->name }}</td>
-                <td>{{ $media->year }}</td>
-                <td>{{ $media->abstract }}</td>
-            </tr>
+        <tr>
+            <th scope="row" style="width:90px;">
+                <img src="{{$media->file_thumb_url}}" style="width: 90px"/>
+            </th>
+            <td>
+                <a href="" style="color: #007bff"></a>
+                <div style="font-size: 12px; padding-top: 5px;">{{$media->name}}</div>
+                <div style="font-size: 12px; padding-top: 5px;">{{$media->author}}</div>
+                @if($media->category_id===1)
+                    <a href="/books/book/{{$media->media_id}}">Детальнее </a>
+                @elseif($media->category_id===2)
+                    <a href="/videos/video/{{$media->media_id}}">Детальнее </a>
+                @elseif($media->category_id===3)
+                    <a href="/articles/article/{{$media->media_id}}">Детальнее </a>
+                @endif
+            </td>
+        </tr>
         @endforeach
     </tbody>
 </table>

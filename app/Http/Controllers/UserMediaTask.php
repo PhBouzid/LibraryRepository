@@ -3,30 +3,34 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Media;
+use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserMediaTask extends Controller
 {
 
     public function showResources(){
-        $media = Media::paginate(15);
-        return view('libcontent',['medias'=>$media,'category'=>0]);
+        $user = Auth::user();
+        $medias = $user->medias()->paginate(10);
+        return view('libcontent',['medias'=>$medias,'category'=>4]);
     }
 
-    public function addResource(){
-        $media = Media::where('category_id',1)->paginate(15);
-        return view('libcontent',['medias'=>$media,'category'=>1]);
+    public function addResource($id){
+        $user = Auth::user();
+        $user->medias()->attach($id);
+        $user->save();
+        return back()
+            ->with('success','You have successfully add resource.');
     }
 
-    public function cancelResource(){
-        $media = Media::where('category_id',2)->paginate(15);
-        return view('libcontent',['medias'=>$media,'category'=>2]);
-    }
-
-    public function getResource($id){
-        $book = Media::find($id);
-        return view('media',['media'=>$book,'category'=>1]);
+    public function cancelResource($id){
+        $user = Auth::user();
+        $user->medias()->detach($id);
+        $user->save();
+        return back()
+            ->with('success','You have successfully canceled resource.');
     }
 
     public function approveRequest($id){

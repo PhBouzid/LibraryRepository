@@ -5,50 +5,64 @@
 @section('content')
 
 <div class="container-fluid">
-            <h2 style="margin: 1.1em">
-                Библиотека - Добавление контента
-            </h2>
-            <form style="border: 1px solid #ccc; border-radius: 5px; padding: 15px 10px;">
+    <div class="panel-heading">
+        <h2>Загрузка контента</h2>
+    </div>
+    <div class="panel-body">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+            <form enctype="multipart/form-data" style="border: 1px solid #ccc; border-radius: 5px; padding: 15px 10px;" method="POST" action="{{ route('insertMedia') }}">
+                @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Автор</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="Автор">
+                        <label for="author">Автор</label>
+                        <input type="text" class="form-control" name="author" id="author" placeholder="Автор">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Наименование</label>
-                        <input type="password" class="form-control" id="inputPassword4" placeholder="Наименование">
+                        <label for="name">Наименование</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Наименование">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputAddress">Год выпуска</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Год выпуска">
+                    <label for="year">Год выпуска</label>
+                    <input type="text" class="form-control" name="year" id="year" placeholder="Год выпуска">
                 </div>
                 <div class="form-group">
-                    <label for="inputAddress2">Описание</label>
-                    <textarea  class="form-control" id="inputAddress2" placeholder="Описание книги"></textarea>
+                    <label for="abstract">Описание</label>
+                    <textarea  class="form-control" id="abstract" name="abstract" placeholder="Описание книги"></textarea>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="inputState">Тип контента</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Книга</option>
-                            <option>Видео</option>
-                            <option>Аудио</option>
-                            <option>Журнал</option>
+                        <label for="category_id">Тип контента</label>
+                        <select id="category_id" name="category_id" class="form-control">
+                            <option selected value=1>Книга</option>
+                            <option value=2>Видео</option>
+                            <option value=3>Журнал/Статья</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                            Черновик
-                        </label>
-                    </div>
+                      <label for="file">Файл</label>
+                      <input type="file" class="form-control-file" name="file" id="file">
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </form>
         </div>
+</div>
 @endsection
 
 @section('footscript')
