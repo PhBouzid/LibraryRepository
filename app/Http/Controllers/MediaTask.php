@@ -56,6 +56,8 @@ class MediaTask extends Controller
         $media->file_url = $request->file_url;
         $media->file_thumb_url = $request->file_thumb_url;
         $media->save();
+        return back()
+            ->with('success','You have successfully update document.');
     }
 
     public function insertMedia(Request $request){
@@ -77,7 +79,7 @@ class MediaTask extends Controller
         $media->file_thumb_url = "/file/".$thumb_fileName;
         $media->save();
         return back()
-            ->with('success','You have successfully file uplaod.')
+            ->with('success','Вы успешно загрузили файл.')
             ->with('file',$fileName);
     }
 }
